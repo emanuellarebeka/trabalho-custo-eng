@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Engenharia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media (min-width: 801px) { body { background-color: #bfdbfe; } }
+        @media (min-width: 501px) and (max-width: 800px) { body { background-color: #d1fae5; } }
+        @media (max-width: 500px) { body { background-color: #fef9c3; } }
+        button:focus, a:focus, input:focus, select:focus { outline: 2px solid #ef4444; outline-offset: 2px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header class="bg-red-600 text-white p-4 shadow-lg flex flex-wrap justify-between items-center">
+        <h1 class="text-2xl font-bold mb-2 md:mb-0">Setor Engenharia de Custos</h1>
+        <nav class="flex flex-wrap space-x-2 md:space-x-4 text-sm md:text-base">
+            <a href="index.html" class="hover:bg-red-700 p-2 rounded transition" title="Menu Principal">Home</a>
+            <a href="lista-produtos.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Peças/Componentes">Produtos</a>
+            <a href="lista-clientes.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Clientes">Clientes</a>
+            <a href="lista-fornecedores.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Fornecedores">Fornecedores</a>
+            <a href="lista-compras.html" class="hover:bg-red-700 p-2 rounded transition" title="Lista de Peças a serem solicitadas">Lista de Compras</a>
+        </nav>
+    </header>
+
+    <main class="flex-grow p-6">
+        <section class="bg-white p-8 rounded-lg shadow-xl max-w-2xl mx-auto text-center">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Gerenciamento de Entidades e Lista de Compras</h2>
+            <p class="mb-6 text-gray-600">Selecione uma opção para gerenciar cadastros ou iniciar uma Lista de Compras.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <a href="lista-produtos.html" class="bg-green-500 text-white p-4 rounded-lg shadow-md hover:bg-green-600 transition text-lg font-medium" title="Gerenciar Peças">Produtos</a>
+                <a href="lista-clientes.html" class="bg-yellow-500 text-white p-4 rounded-lg shadow-md hover:bg-yellow-600 transition text-lg font-medium" title="Gerenciar Clientes">Clientes</a>
+                <a href="lista-fornecedores.html" class="bg-blue-500 text-white p-4 rounded-lg shadow-md hover:bg-blue-600 transition text-lg font-medium" title="Gerenciar Fornecedores">Fornecedores</a>
+            </div>
+            
+            <a href="lista-compras.html" class="mt-6 inline-block bg-red-600 text-white p-4 rounded-lg shadow-md hover:bg-red-700 transition text-lg font-medium w-full" title="Acessar e finalizar a lista de itens a comprar">
+                Ver Lista de Compras
+            </a>
+        </section>
+    </main>
+
+    <footer class="bg-gray-700 text-white text-center p-3 text-sm">
+        Sistema Engenharia | HTML, CSS & JavaScript
+    </footer>
+
+    <script>
+        const DADOS_INICIAIS = {
+            produtos: [{"id":1,"nome":"Cimento CP-II 50kg","preco":35.5,"projeto":"Estrutura","fabricante":"Cimex","unidade":"Saco","dataAquisicao":"2025-01-10"},{"id":2,"nome":"Vergalhão CA-50 10mm","preco":48.9,"projeto":"Armação","fabricante":"Aço Forte","unidade":"Barra","dataAquisicao":"2024-08-20"},{"id":3,"nome":"Tubo PVC 100mm","preco":22.75,"projeto":"Hidráulica","fabricante":"Tigre","unidade":"Metro","dataAquisicao":"2025-05-01"},{"id":4,"nome":"Bloco Cerâmico 14x19x29","preco":1.5,"projeto":"Alvenaria","fabricante":"Ceramica Sul","unidade":"Unidade","dataAquisicao":"2025-06-15"},{"id":5,"nome":"Fio Rígido 2.5mm²","preco":1.9,"projeto":"Elétrica","fabricante":"EletroCabos","unidade":"Metro","dataAquisicao":"2025-03-22"},{"id":6,"nome":"Argamassa AC-III 20kg","preco":18,"projeto":"Acabamento","fabricante":"Quartzolit","unidade":"Saco","dataAquisicao":"2025-02-05"},{"id":7,"nome":"Telha Ondulada 6mm","preco":45,"projeto":"Cobertura","fabricante":"Brasilit","unidade":"Peça","dataAquisicao":"2025-01-01"},{"id":8,"nome":"Conexão Joelho 90º 50mm","preco":3.5,"projeto":"Hidráulica","fabricante":"Amanco","unidade":"Unidade","dataAquisicao":"2025-04-12"},{"id":9,"nome":"Areia Lavada Média","preco":80,"projeto":"Concreto","fabricante":"Mineração Alpha","unidade":"m³","dataAquisicao":"2024-11-30"},{"id":10,"nome":"Disjuntor Bipolar 20A","preco":15.2,"projeto":"Elétrica","fabricante":"Siemens","unidade":"Unidade","dataAquisicao":"2025-07-01"}],
+            clientes: [{"id":1,"nome":"Inovação Técnica LTDA","contato":"Carlos Faria","telefone":"3000-1111","cnpj":"10.000.000/0001-00","setor":"Pesquisa e Desenvolvimento","email":"contato@inovacao.com"},{"id":2,"nome":"Metalúrgica Rápida SA","contato":"Ana Clara","telefone":"3000-2222","cnpj":"20.000.000/0001-00","setor":"Produção","email":"vendas@metalurgica.com"},{"id":3,"nome":"Automação Futura","contato":"Roberto Alves","telefone":"3000-3333","cnpj":"30.000.000/0001-00","setor":"Manutenção Industrial","email":"roberto@automacao.com"},{"id":4,"nome":"SoftDesign Eletro","contato":"Juliana Mendes","telefone":"3000-4444","cnpj":"40.000.000/0001-00","setor":"Prototipagem","email":"juliana@softdesign.com"},{"id":5,"nome":"Engenharia Sólida","contato":"Pedro Rocha","telefone":"3000-5555","cnpj":"50.000.000/0001-00","setor":"Construção Naval","email":"pedro@solida.com"},{"id":6,"nome":"Robótica Avançada BR","contato":"Leticia Souza","telefone":"3000-6666","cnpj":"60.000.000/0001-00","setor":"Robótica","email":"leticia@robotica.com"},{"id":7,"nome":"Fábrica Ágil","contato":"Gustavo Lima","telefone":"3000-7777","cnpj":"70.000.000/0001-00","setor":"Produção","email":"gustavo@agil.com"},{"id":8,"nome":"Tecno Sistemas","contato":"Márcia Santos","telefone":"3000-8888","cnpj":"80.000.000/0001-00","setor":"TI e Redes","email":"marcia@tecno.com"},{"id":9,"nome":"Eletro Components","contato":"Ricardo Melo","telefone":"3000-9999","cnpj":"90.000.000/0001-00","setor":"Montagem","email":"ricardo@eletro.com"},{"id":10,"nome":"Hidro Solutions","contato":"Fernanda Costa","telefone":"3000-0000","cnpj":"11.000.000/0001-00","setor":"Hidráulica","email":"fernanda@hidro.com"}],
+            fornecedores: [{"id":1,"nome":"Componentes Master","representante":"João Goulart","telefone":"4000-1111","cnpj":"12.000.000/0001-00","especialidade":"Microeletrônica","prazoEntrega":"10 dias"},{"id":2,"nome":"Aços e Metais BR","representante":"Bianca Silva","telefone":"4000-2222","cnpj":"22.000.000/0001-00","especialidade":"Fixadores e Perfis","prazoEntrega":"5 dias"},{"id":3,"nome":"Máquinas Precisas","representante":"André Lima","telefone":"4000-3333","cnpj":"32.000.000/0001-00","especialidade":"Motores e Atuadores","prazoEntrega":"15 dias"},{"id":4,"nome":"Plásticos Industriais","representante":"Sofia Nunes","telefone":"4000-4444","cnpj":"42.000.000/0001-00","especialidade":"Injeção e Moldagem","prazoEntrega":"20 dias"},{"id":5,"nome":"Elétrica Total","representante":"Marcelo Ruiz","telefone":"4000-5555","cnpj":"52.000.000/0001-00","especialidade":"Cabos e Fios","prazoEntrega":"3 dias"},{"id":6,"nome":"Medição Científica","representante":"Vanessa Melo","telefone":"4000-6666","cnpj":"62.000.000/0001-00","especialidade":"Sensores","prazoEntrega":"12 dias"},{"id":7,"nome":"Hidro & Válvulas","representante":"Paulo Souza","telefone":"4000-7777","cnpj":"72.000.000/0001-00","especialidade":"Hidráulica e Pneumática","prazoEntrega":"7 dias"},{"id":8,"nome":"Mecânica Simples","representante":"Rafael Costa","telefone":"4000-8888","cnpj":"82.000.000/0001-00","especialidade":"Pinos e Buchas","prazoEntrega":"4 dias"},{"id":9,"nome":"Testes e Reparos","representante":"Laura Silva","telefone":"4000-9999","cnpj":"92.000.000/0001-00","especialidade":"Ferramental","prazoEntrega":"6 dias"},{"id":10,"nome":"Baterias Power","representante":"Henrique Guedes","telefone":"4000-0000","cnpj":"13.000.000/0001-00","especialidade":"Fontes de Energia","prazoEntrega":"8 dias"}],
+            listaCompras: { cliente: null, fornecedor: null, produtos: [] }
+        };
+
+        function salvarDados(chave, dados) { localStorage.setItem(chave, JSON.stringify(dados)); }
+        function carregarDados(chave) { 
+            const dadosSalvos = localStorage.getItem(chave);
+            if (dadosSalvos) {
+                try {
+                    const parsed = JSON.parse(dadosSalvos);
+                    return parsed;
+                } catch (e) {
+                    console.error(`Erro ao carregar ${chave}, resetando...`, e);
+                }
+            }
+            salvarDados(chave, DADOS_INICIAIS[chave]);
+            return DADOS_INICIAIS[chave];
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarDados('produtos'); 
+            carregarDados('clientes'); 
+            carregarDados('fornecedores');
+            carregarDados('listaCompras'); 
+        });
+    </script>
+</body>
+</html>

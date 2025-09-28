@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Fornecedores - Engenharia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media (min-width: 801px) { body { background-color: #bfdbfe; } }
+        @media (min-width: 501px) and (max-width: 800px) { body { background-color: #d1fae5; } }
+        @media (max-width: 500px) { body { background-color: #fef9c3; } }
+        button:focus, a:focus, input:focus, select:focus { outline: 2px solid #ef4444; outline-offset: 2px; }
+        .crud-table th, .crud-table td { padding: 8px 12px; border: 1px solid #e5e7eb; text-align: left; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header class="bg-red-600 text-white p-4 shadow-lg flex flex-wrap justify-between items-center">
+        <h1 class="text-2xl font-bold mb-2 md:mb-0">Setor Engenharia de Custos</h1>
+        <nav class="flex flex-wrap space-x-2 md:space-x-4 text-sm md:text-base">
+            <a href="index.html" class="hover:bg-red-700 p-2 rounded transition" title="Menu Principal">Home</a>
+            <a href="lista-produtos.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Peças/Componentes">Produtos</a>
+            <a href="lista-clientes.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Clientes">Clientes</a>
+            <a href="lista-fornecedores.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Fornecedores">Fornecedores</a>
+            <a href="lista-compras.html" class="hover:bg-red-700 p-2 rounded transition" title="Lista de Peças a serem solicitadas">Lista de Compras</a>
+        </nav>
+    </header>
+
+    <main class="flex-grow p-6">
+        <section class="bg-white p-6 rounded-lg shadow-xl">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-semibold text-blue-600">Fornecedores Cadastrados</h2>
+                <div class="flex space-x-3">
+                    <button id="btn-reset-fornecedores" class="bg-gray-500 text-white p-2 rounded hover:bg-gray-600 transition text-sm" title="Restaura a lista de fornecedores aos 10 exemplos originais">Reset</button>
+                    <a href="cadastro-fornecedor.html" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition" title="Adicionar um novo fornecedor ao sistema">Novo Fornecedor</a>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table id="tabela-fornecedores" class="crud-table min-w-full bg-white">
+                    <thead class="bg-blue-100">
+                        <tr>
+                            <th>Empresa</th>
+                            <th>Representante</th>
+                            <th>Especialidade</th>
+                            <th>Telefone</th>
+                            <th>CNPJ</th>
+                            <th>Prazo Entrega</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-700 text-white text-center p-3 text-sm">
+        Sistema Engenharia | HTML, CSS & JavaScript
+    </footer>
+
+    <script>
+        const DADOS_INICIAIS = {
+            fornecedores: [{"id":1,"nome":"Componentes Master","representante":"João Goulart","telefone":"4000-1111","cnpj":"12.000.000/0001-00","especialidade":"Microeletrônica","prazoEntrega":"10 dias"},{"id":2,"nome":"Aços e Metais BR","representante":"Bianca Silva","telefone":"4000-2222","cnpj":"22.000.000/0001-00","especialidade":"Fixadores e Perfis","prazoEntrega":"5 dias"},{"id":3,"nome":"Máquinas Precisas","representante":"André Lima","telefone":"4000-3333","cnpj":"32.000.000/0001-00","especialidade":"Motores e Atuadores","prazoEntrega":"15 dias"},{"id":4,"nome":"Plásticos Industriais","representante":"Sofia Nunes","telefone":"4000-4444","cnpj":"42.000.000/0001-00","especialidade":"Injeção e Moldagem","prazoEntrega":"20 dias"},{"id":5,"nome":"Elétrica Total","representante":"Marcelo Ruiz","telefone":"4000-5555","cnpj":"52.000.000/0001-00","especialidade":"Cabos e Fios","prazoEntrega":"3 dias"},{"id":6,"nome":"Medição Científica","representante":"Vanessa Melo","telefone":"4000-6666","cnpj":"62.000.000/0001-00","especialidade":"Sensores","prazoEntrega":"12 dias"},{"id":7,"nome":"Hidro & Válvulas","representante":"Paulo Souza","telefone":"4000-7777","cnpj":"72.000.000/0001-00","especialidade":"Hidráulica e Pneumática","prazoEntrega":"7 dias"},{"id":8,"nome":"Mecânica Simples","representante":"Rafael Costa","telefone":"4000-8888","cnpj":"82.000.000/0001-00","especialidade":"Pinos e Buchas","prazoEntrega":"4 dias"},{"id":9,"nome":"Testes e Reparos","representante":"Laura Silva","telefone":"4000-9999","cnpj":"92.000.000/0001-00","especialidade":"Ferramental","prazoEntrega":"6 dias"},{"id":10,"nome":"Baterias Power","representante":"Henrique Guedes","telefone":"4000-0000","cnpj":"13.000.000/0001-00","especialidade":"Fontes de Energia","prazoEntrega":"8 dias"}],
+            listaCompras: { cliente: null, fornecedor: null, produtos: [] }
+        };
+
+        function salvarDados(chave, dados) { localStorage.setItem(chave, JSON.stringify(dados)); }
+        function carregarDados(chave) { 
+            const dadosSalvos = localStorage.getItem(chave);
+            if (dadosSalvos) return JSON.parse(dadosSalvos);
+            salvarDados(chave, DADOS_INICIAIS[chave]);
+            return DADOS_INICIAIS[chave];
+        }
+
+        function renderizarTabelaFornecedores() {
+            const fornecedores = carregarDados('fornecedores');
+            const tbody = document.getElementById('tabela-fornecedores').querySelector('tbody');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+
+            fornecedores.forEach(fornecedor => {
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-gray-50 transition';
+                
+                tr.innerHTML = `
+                    <td>${fornecedor.nome}</td>
+                    <td>${fornecedor.representante}</td>
+                    <td>${fornecedor.especialidade}</td>
+                    <td>${fornecedor.telefone}</td>
+                    <td>${fornecedor.cnpj}</td>
+                    <td>${fornecedor.prazoEntrega}</td>
+                    <td class="space-x-2">
+                        <a href="cadastro-fornecedor.html?id=${fornecedor.id}" class="text-white p-1 rounded text-sm bg-blue-500 hover:bg-blue-600" title="Abrir formulário para editar os dados">Editar</a>
+                        <button onclick="adicionarFornecedorALista(${fornecedor.id})" class="text-white p-1 rounded text-sm bg-red-600 hover:bg-red-700" title="Define este fornecedor como o principal para a Lista de Compras">Definir Fornecedor</button>
+                        <button onclick="excluirFornecedor(${fornecedor.id})" class="text-white p-1 rounded text-sm bg-red-500 hover:bg-red-600" title="Excluir o fornecedor do cadastro">Excluir</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function adicionarFornecedorALista(id) {
+            let listaCompras = carregarDados('listaCompras'); 
+            listaCompras.fornecedor = id;
+            salvarDados('listaCompras', listaCompras);
+            console.log(`Fornecedor ID ${id} definido na Lista de Compras.`);
+        }
+
+        function excluirFornecedor(id) {
+            if (!confirm('CONFIRMAR EXCLUSÃO: Tem certeza que deseja excluir este Fornecedor?')) return;
+            let fornecedores = carregarDados('fornecedores');
+            fornecedores = fornecedores.filter(f => f.id !== id);
+            salvarDados('fornecedores', fornecedores);
+            window.location.reload(); 
+        }
+
+        function resetarFornecedores() {
+            if (confirm('Tem certeza que deseja RESETAR os dados de Fornecedores?')) {
+                salvarDados('fornecedores', DADOS_INICIAIS.fornecedores);
+                window.location.reload();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderizarTabelaFornecedores();
+            document.getElementById('btn-reset-fornecedores').onclick = resetarFornecedores;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Cliente - Engenharia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media (min-width: 801px) { body { background-color: #bfdbfe; } }
+        @media (min-width: 501px) and (max-width: 800px) { body { background-color: #d1fae5; } }
+        @media (max-width: 500px) { body { background-color: #fef9c3; } }
+        button:focus, a:focus, input:focus, select:focus { outline: 2px solid #ef4444; outline-offset: 2px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <header class="bg-red-600 text-white p-4 shadow-lg flex flex-wrap justify-between items-center">
+        <h1 class="text-2xl font-bold mb-2 md:mb-0">Setor Engenharia de Custos</h1>
+        <nav class="flex flex-wrap space-x-2 md:space-x-4 text-sm md:text-base">
+            <a href="index.html" class="hover:bg-red-700 p-2 rounded transition" title="Menu Principal">Home</a>
+            <a href="lista-produtos.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Peças/Componentes">Produtos</a>
+            <a href="lista-clientes.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Clientes">Clientes</a>
+            <a href="lista-fornecedores.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Fornecedores">Fornecedores</a>
+            <a href="lista-compras.html" class="hover:bg-red-700 p-2 rounded transition" title="Lista de Peças a serem solicitadas">Lista de Compras</a>
+        </nav>
+    </header>
+
+    <main class="flex-grow p-6">
+        <section class="bg-white p-6 rounded-lg shadow-xl max-w-2xl mx-auto">
+            <h2 class="text-xl font-semibold mb-4 text-yellow-600">Cadastro/Edição de Cliente</h2>
+            <form id="form-cliente" class="space-y-4">
+                <input type="hidden" id="cliente-id">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="cliente-nome" class="block text-sm font-medium text-gray-700">1. Nome da Empresa:</label>
+                        <input type="text" id="cliente-nome" required class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-yellow-500" title="Razão social ou nome fantasia">
+                    </div>
+                    <div>
+                        <label for="cliente-contato" class="block text-sm font-medium text-gray-700">2. Contato Responsável:</label>
+                        <input type="text" id="cliente-contato" required class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-yellow-500" title="Nome da pessoa de contato">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="cliente-setor" class="block text-sm font-medium text-gray-700">3. Setor Principal:</label>
+                        <input type="text" id="cliente-setor" required class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-yellow-500" title="Área de atuação (Ex: Robótica, P&D)">
+                    </div>
+                    <div>
+                        <label for="cliente-telefone" class="block text-sm font-medium text-gray-700">4. Telefone:</label>
+                        <input type="tel" id="cliente-telefone" class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-yellow-500" title="Telefone comercial">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="cliente-cnpj" class="block text-sm font-medium text-gray-700">5. CNPJ:</label>
+                        <input type="text" id="cliente-cnpj" required class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-yellow-500" title="Número de registro da empresa">
+                    </div>
+                    <div>
+                        <label for="cliente-email" class="block text-sm font-medium text-gray-700">6. Email:</label>
+                        <input type="email" id="cliente-email" required class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-yellow-500" title="Email para comunicação">
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-end space-x-3">
+                    <a href="lista-clientes.html" class="bg-gray-400 text-white p-2 rounded hover:bg-gray-500 transition" title="Descartar alterações e voltar à lista">Cancelar</a>
+                    <button type="submit" class="bg-yellow-500 text-white p-2 rounded hover:bg-yellow-600 transition" title="Salvar os dados do cliente">Salvar Cliente</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer class="bg-gray-700 text-white text-center p-3 text-sm">
+        Sistema Engenharia | HTML, CSS & JavaScript
+    </footer>
+
+    <script>
+        const DADOS_INICIAIS = {
+            clientes: [{"id":1,"nome":"Inovação Técnica LTDA","contato":"Carlos Faria","telefone":"3000-1111","cnpj":"10.000.000/0001-00","setor":"Pesquisa e Desenvolvimento","email":"contato@inovacao.com"},{"id":2,"nome":"Metalúrgica Rápida SA","contato":"Ana Clara","telefone":"3000-2222","cnpj":"20.000.000/0001-00","setor":"Produção","email":"vendas@metalurgica.com"},{"id":3,"nome":"Automação Futura","contato":"Roberto Alves","telefone":"3000-3333","cnpj":"30.000.000/0001-00","setor":"Manutenção Industrial","email":"roberto@automacao.com"},{"id":4,"nome":"SoftDesign Eletro","contato":"Juliana Mendes","telefone":"3000-4444","cnpj":"40.000.000/0001-00","setor":"Prototipagem","email":"juliana@softdesign.com"},{"id":5,"nome":"Engenharia Sólida","contato":"Pedro Rocha","telefone":"3000-5555","cnpj":"50.000.000/0001-00","setor":"Construção Naval","email":"pedro@solida.com"},{"id":6,"nome":"Robótica Avançada BR","contato":"Leticia Souza","telefone":"3000-6666","cnpj":"60.000.000/0001-00","setor":"Robótica","email":"leticia@robotica.com"},{"id":7,"nome":"Fábrica Ágil","contato":"Gustavo Lima","telefone":"3000-7777","cnpj":"70.000.000/0001-00","setor":"Produção","email":"gustavo@agil.com"},{"id":8,"nome":"Tecno Sistemas","contato":"Márcia Santos","telefone":"3000-8888","cnpj":"80.000.000/0001-00","setor":"TI e Redes","email":"marcia@tecno.com"},{"id":9,"nome":"Eletro Components","contato":"Ricardo Melo","telefone":"3000-9999","cnpj":"90.000.000/0001-00","setor":"Montagem","email":"ricardo@eletro.com"},{"id":10,"nome":"Hidro Solutions","contato":"Fernanda Costa","telefone":"3000-0000","cnpj":"11.000.000/0001-00","setor":"Hidráulica","email":"fernanda@hidro.com"}],
+            listaCompras: { cliente: null, fornecedor: null, produtos: [] }
+        };
+
+        function salvarDados(chave, dados) { localStorage.setItem(chave, JSON.stringify(dados)); }
+        function carregarDados(chave) { 
+            const dadosSalvos = localStorage.getItem(chave);
+            if (dadosSalvos) return JSON.parse(dadosSalvos);
+            salvarDados(chave, DADOS_INICIAIS[chave]);
+            return DADOS_INICIAIS[chave];
+        }
+
+        function getNextId(lista) {
+            if (lista.length === 0) return 1;
+            const ids = lista.map(item => item.id).filter(id => typeof id === 'number');
+            if (ids.length === 0) return 1;
+            return Math.max(...ids) + 1;
+        }
+
+        function getItemIdFromUrl() {
+            const params = new URLSearchParams(window.location.search);
+            return parseInt(params.get('id'));
+        }
+
+        function preencherFormularioCliente() {
+            const id = getItemIdFromUrl();
+            if (!id) return;
+            const clientes = carregarDados('clientes');
+            const cliente = clientes.find(c => c.id === id);
+
+            if (cliente) {
+                document.getElementById('cliente-id').value = cliente.id;
+                document.getElementById('cliente-nome').value = cliente.nome;
+                document.getElementById('cliente-contato').value = cliente.contato;
+                document.getElementById('cliente-telefone').value = cliente.telefone;
+                document.getElementById('cliente-cnpj').value = cliente.cnpj;
+                document.getElementById('cliente-setor').value = cliente.setor;
+                document.getElementById('cliente-email').value = cliente.email;
+            }
+        }
+
+        function salvarCliente(e) {
+            e.preventDefault();
+            let clientes = carregarDados('clientes');
+            const id = parseInt(document.getElementById('cliente-id').value);
+            
+            const clienteNovo = {
+                nome: document.getElementById('cliente-nome').value,
+                contato: document.getElementById('cliente-contato').value,
+                telefone: document.getElementById('cliente-telefone').value,
+                cnpj: document.getElementById('cliente-cnpj').value,
+                setor: document.getElementById('cliente-setor').value,
+                email: document.getElementById('cliente-email').value
+            };
+
+            if (id) {
+                const index = clientes.findIndex(c => c.id === id);
+                if (index !== -1) clientes[index] = { id: id, ...clienteNovo };
+            } else {
+                clienteNovo.id = getNextId(clientes);
+                clientes.push(clienteNovo);
+            }
+
+            salvarDados('clientes', clientes);
+            window.location.href = 'lista-clientes.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            preencherFormularioCliente();
+            document.getElementById('form-cliente').onsubmit = salvarCliente;
+        });
+    </script>
+</body>
+</html>
