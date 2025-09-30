@@ -1,26 +1,53 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Produto - Engenharia</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @media (min-width: 801px) { body { background-color: #bfdbfe; } }
-        @media (min-width: 501px) and (max-width: 800px) { body { background-color: #d1fae5; } }
-        @media (max-width: 500px) { body { background-color: #fef9c3; } }
-        button:focus, a:focus, input:focus, select:focus { outline: 2px solid #ef4444; outline-offset: 2px; }
+        @media (min-width: 801px) {
+            body {
+                background-color: #bfdbfe;
+            }
+        }
+
+        @media (min-width: 501px) and (max-width: 800px) {
+            body {
+                background-color: #d1fae5;
+            }
+        }
+
+        @media (max-width: 500px) {
+            body {
+                background-color: #fef9c3;
+            }
+        }
+
+        button:focus,
+        a:focus,
+        input:focus,
+        select:focus {
+            outline: 2px solid #ef4444;
+            outline-offset: 2px;
+        }
     </style>
 </head>
+
 <body class="min-h-screen flex flex-col">
     <header class="bg-red-600 text-white p-4 shadow-lg flex flex-wrap justify-between items-center">
         <h1 class="text-2xl font-bold mb-2 md:mb-0">Setor Engenharia de Custos</h1>
         <nav class="flex flex-wrap space-x-2 md:space-x-4 text-sm md:text-base">
             <a href="index.html" class="hover:bg-red-700 p-2 rounded transition" title="Menu Principal">Home</a>
-            <a href="lista-produtos.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Peças/Componentes">Produtos</a>
-            <a href="lista-clientes.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Clientes">Clientes</a>
-            <a href="lista-fornecedores.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Fornecedores">Fornecedores</a>
-            <a href="lista-compras.html" class="hover:bg-red-700 p-2 rounded transition" title="Lista de Peças a serem solicitadas">Lista de Compras</a>
+            <a href="lista-produtos.html" class="hover:bg-red-700 p-2 rounded transition"
+                title="Cadastro e Listagem de Peças/Componentes">Produtos</a>
+            <a href="lista-clientes.html" class="hover:bg-red-700 p-2 rounded transition"
+                title="Cadastro e Listagem de Clientes">Clientes</a>
+            <a href="lista-fornecedores.html" class="hover:bg-red-700 p-2 rounded transition"
+                title="Cadastro e Listagem de Fornecedores">Fornecedores</a>
+            <a href="lista-compras.html" class="hover:bg-red-700 p-2 rounded transition"
+                title="Lista de Peças a serem solicitadas">Lista de Compras</a>
         </nav>
     </header>
 
@@ -29,43 +56,64 @@
             <h2 class="text-xl font-semibold mb-4 text-green-600">Cadastro/Edição de Componente</h2>
             <form id="form-produto" class="space-y-4">
                 <input type="hidden" id="produto-id">
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label for="produto-nome" class="block text-sm font-medium text-gray-700">1. Nome da Peça:</label>
-                        <input type="text" id="produto-nome" required class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-green-500" title="Nome completo do componente">
+                        <label for="produto-nome" class="block text-sm font-medium text-gray-700">1. Nome da
+                            Peça:</label>
+                        <input type="text" id="produto-nome" required
+                            class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-green-500"
+                            title="Nome completo do componente">
                     </div>
                     <div>
-                        <label for="produto-preco" class="block text-sm font-medium text-gray-700">2. Preço Unitário:</label>
-                        <input type="number" id="produto-preco" step="0.01" required class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-green-500" title="Custo individual da peça">
+                        <label for="produto-preco" class="block text-sm font-medium text-gray-700">2. Preço
+                            Unitário:</label>
+                        <input type="number" id="produto-preco" step="0.01" required
+                            class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-green-500"
+                            title="Custo individual da peça">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label for="produto-projeto" class="block text-sm font-medium text-gray-700">3. Tipo/Projeto:</label>
-                        <input type="text" id="produto-projeto" required class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-green-500" title="Ex: Estrutura, Hidráulica, Elétrica">
+                        <label for="produto-projeto" class="block text-sm font-medium text-gray-700">3.
+                            Tipo/Projeto:</label>
+                        <input type="text" id="produto-projeto" required
+                            class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-green-500"
+                            title="Ex: Estrutura, Hidráulica, Elétrica">
                     </div>
                     <div>
-                        <label for="produto-fabricante" class="block text-sm font-medium text-gray-700">4. Fabricante:</label>
-                        <input type="text" id="produto-fabricante" class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-green-500" title="Nome da empresa fabricante">
+                        <label for="produto-fabricante" class="block text-sm font-medium text-gray-700">4.
+                            Fabricante:</label>
+                        <input type="text" id="produto-fabricante"
+                            class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-green-500"
+                            title="Nome da empresa fabricante">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label for="produto-unidade" class="block text-sm font-medium text-gray-700">5. Unidade de Medida:</label>
-                        <input type="text" id="produto-unidade" required class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-green-500" title="Ex: Saco, Metro, Unidade, m³">
+                        <label for="produto-unidade" class="block text-sm font-medium text-gray-700">5. Unidade de
+                            Medida:</label>
+                        <input type="text" id="produto-unidade" required
+                            class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-green-500"
+                            title="Ex: Saco, Metro, Unidade, m³">
                     </div>
                     <div>
-                        <label for="produto-dataAquisicao" class="block text-sm font-medium text-gray-700">6. Data de Aquisição:</label>
-                        <input type="date" id="produto-dataAquisicao" required class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-green-500" title="Data da última compra ou entrada no estoque">
+                        <label for="produto-dataAquisicao" class="block text-sm font-medium text-gray-700">6. Data de
+                            Aquisição:</label>
+                        <input type="date" id="produto-dataAquisicao" required
+                            class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-green-500"
+                            title="Data da última compra ou entrada no estoque">
                     </div>
                 </div>
 
                 <div class="pt-4 flex justify-end space-x-3">
-                    <a href="lista-produtos.html" class="bg-gray-400 text-white p-2 rounded hover:bg-gray-500 transition" title="Descartar alterações e voltar à lista">Cancelar</a>
-                    <button type="submit" class="bg-green-500 text-white p-2 rounded hover:bg-green-600 transition" title="Salvar os dados no sistema">Salvar Peça</button>
+                    <a href="lista-produtos.html"
+                        class="bg-gray-400 text-white p-2 rounded hover:bg-gray-500 transition"
+                        title="Descartar alterações e voltar à lista">Cancelar</a>
+                    <button type="submit" class="bg-green-500 text-white p-2 rounded hover:bg-green-600 transition"
+                        title="Salvar os dados no sistema">Salvar Peça</button>
                 </div>
             </form>
         </section>
@@ -75,80 +123,7 @@
         Sistema Engenharia | HTML, CSS & JavaScript
     </footer>
 
-    <script>
-        const DADOS_INICIAIS = {
-            produtos: [{"id":1,"nome":"Cimento CP-II 50kg","preco":35.5,"projeto":"Estrutura","fabricante":"Cimex","unidade":"Saco","dataAquisicao":"2025-01-10"},{"id":2,"nome":"Vergalhão CA-50 10mm","preco":48.9,"projeto":"Armação","fabricante":"Aço Forte","unidade":"Barra","dataAquisicao":"2024-08-20"},{"id":3,"nome":"Tubo PVC 100mm","preco":22.75,"projeto":"Hidráulica","fabricante":"Tigre","unidade":"Metro","dataAquisicao":"2025-05-01"},{"id":4,"nome":"Bloco Cerâmico 14x19x29","preco":1.5,"projeto":"Alvenaria","fabricante":"Ceramica Sul","unidade":"Unidade","dataAquisicao":"2025-06-15"},{"id":5,"nome":"Fio Rígido 2.5mm²","preco":1.9,"projeto":"Elétrica","fabricante":"EletroCabos","unidade":"Metro","dataAquisicao":"2025-03-22"},{"id":6,"nome":"Argamassa AC-III 20kg","preco":18,"projeto":"Acabamento","fabricante":"Quartzolit","unidade":"Saco","dataAquisicao":"2025-02-05"},{"id":7,"nome":"Telha Ondulada 6mm","preco":45,"projeto":"Cobertura","fabricante":"Brasilit","unidade":"Peça","dataAquisicao":"2025-01-01"},{"id":8,"nome":"Conexão Joelho 90º 50mm","preco":3.5,"projeto":"Hidráulica","fabricante":"Amanco","unidade":"Unidade","dataAquisicao":"2025-04-12"},{"id":9,"nome":"Areia Lavada Média","preco":80,"projeto":"Concreto","fabricante":"Mineração Alpha","unidade":"m³","dataAquisicao":"2024-11-30"},{"id":10,"nome":"Disjuntor Bipolar 20A","preco":15.2,"projeto":"Elétrica","fabricante":"Siemens","unidade":"Unidade","dataAquisicao":"2025-07-01"}],
-            listaCompras: { cliente: null, fornecedor: null, produtos: [] }
-        };
-        
-        function salvarDados(chave, dados) { localStorage.setItem(chave, JSON.stringify(dados)); }
-        function carregarDados(chave) { 
-            const dadosSalvos = localStorage.getItem(chave);
-            if (dadosSalvos) return JSON.parse(dadosSalvos);
-            salvarDados(chave, DADOS_INICIAIS[chave]);
-            return DADOS_INICIAIS[chave];
-        }
-
-        function getNextId(lista) {
-            if (lista.length === 0) return 1;
-            const ids = lista.map(item => item.id).filter(id => typeof id === 'number');
-            if (ids.length === 0) return 1;
-            return Math.max(...ids) + 1;
-        }
-
-        function getItemIdFromUrl() {
-            const params = new URLSearchParams(window.location.search);
-            return parseInt(params.get('id'));
-        }
-
-        function preencherFormularioProduto() {
-            const id = getItemIdFromUrl();
-            if (!id) return;
-            
-            const produtos = carregarDados('produtos');
-            const produto = produtos.find(p => p.id === id);
-
-            if (produto) {
-                document.getElementById('produto-id').value = produto.id;
-                document.getElementById('produto-nome').value = produto.nome;
-                document.getElementById('produto-preco').value = produto.preco;
-                document.getElementById('produto-projeto').value = produto.projeto;
-                document.getElementById('produto-fabricante').value = produto.fabricante;
-                document.getElementById('produto-unidade').value = produto.unidade;
-                document.getElementById('produto-dataAquisicao').value = produto.dataAquisicao;
-            }
-        }
-
-        function salvarProduto(e) {
-            e.preventDefault();
-            let produtos = carregarDados('produtos');
-            const id = parseInt(document.getElementById('produto-id').value);
-            
-            const produtoNovo = {
-                nome: document.getElementById('produto-nome').value,
-                preco: parseFloat(document.getElementById('produto-preco').value),
-                projeto: document.getElementById('produto-projeto').value,
-                fabricante: document.getElementById('produto-fabricante').value,
-                unidade: document.getElementById('produto-unidade').value,
-                dataAquisicao: document.getElementById('produto-dataAquisicao').value
-            };
-
-            if (id) {
-                const index = produtos.findIndex(p => p.id === id);
-                if (index !== -1) produtos[index] = { id: id, ...produtoNovo };
-            } else {
-                produtoNovo.id = getNextId(produtos);
-                produtos.push(produtoNovo);
-            }
-
-            salvarDados('produtos', produtos);
-            window.location.href = 'lista-produtos.html';
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            preencherFormularioProduto();
-            document.getElementById('form-produto').onsubmit = salvarProduto;
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
+
 </html>

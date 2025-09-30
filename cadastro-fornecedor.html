@@ -1,26 +1,53 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Fornecedor - Engenharia</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @media (min-width: 801px) { body { background-color: #bfdbfe; } }
-        @media (min-width: 501px) and (max-width: 800px) { body { background-color: #d1fae5; } }
-        @media (max-width: 500px) { body { background-color: #fef9c3; } }
-        button:focus, a:focus, input:focus, select:focus { outline: 2px solid #ef4444; outline-offset: 2px; }
+        @media (min-width: 801px) {
+            body {
+                background-color: #bfdbfe;
+            }
+        }
+
+        @media (min-width: 501px) and (max-width: 800px) {
+            body {
+                background-color: #d1fae5;
+            }
+        }
+
+        @media (max-width: 500px) {
+            body {
+                background-color: #fef9c3;
+            }
+        }
+
+        button:focus,
+        a:focus,
+        input:focus,
+        select:focus {
+            outline: 2px solid #ef4444;
+            outline-offset: 2px;
+        }
     </style>
 </head>
+
 <body class="min-h-screen flex flex-col">
     <header class="bg-red-600 text-white p-4 shadow-lg flex flex-wrap justify-between items-center">
         <h1 class="text-2xl font-bold mb-2 md:mb-0">Setor Engenharia de Custos</h1>
         <nav class="flex flex-wrap space-x-2 md:space-x-4 text-sm md:text-base">
             <a href="index.html" class="hover:bg-red-700 p-2 rounded transition" title="Menu Principal">Home</a>
-            <a href="lista-produtos.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Peças/Componentes">Produtos</a>
-            <a href="lista-clientes.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Clientes">Clientes</a>
-            <a href="lista-fornecedores.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Fornecedores">Fornecedores</a>
-            <a href="lista-compras.html" class="hover:bg-red-700 p-2 rounded transition" title="Lista de Peças a serem solicitadas">Lista de Compras</a>
+            <a href="lista-produtos.html" class="hover:bg-red-700 p-2 rounded transition"
+                title="Cadastro e Listagem de Peças/Componentes">Produtos</a>
+            <a href="lista-clientes.html" class="hover:bg-red-700 p-2 rounded transition"
+                title="Cadastro e Listagem de Clientes">Clientes</a>
+            <a href="lista-fornecedores.html" class="hover:bg-red-700 p-2 rounded transition"
+                title="Cadastro e Listagem de Fornecedores">Fornecedores</a>
+            <a href="lista-compras.html" class="hover:bg-red-700 p-2 rounded transition"
+                title="Lista de Peças a serem solicitadas">Lista de Compras</a>
         </nav>
     </header>
 
@@ -29,43 +56,63 @@
             <h2 class="text-xl font-semibold mb-4 text-blue-600">Cadastro/Edição de Fornecedor</h2>
             <form id="form-fornecedor" class="space-y-4">
                 <input type="hidden" id="fornecedor-id">
-                
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label for="fornecedor-nome" class="block text-sm font-medium text-gray-700">1. Nome da Empresa:</label>
-                        <input type="text" id="fornecedor-nome" required class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-blue-500" title="Razão social do fornecedor">
+                        <label for="fornecedor-nome" class="block text-sm font-medium text-gray-700">1. Nome da
+                            Empresa:</label>
+                        <input type="text" id="fornecedor-nome" required
+                            class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-blue-500"
+                            title="Razão social do fornecedor">
                     </div>
                     <div>
-                        <label for="fornecedor-representante" class="block text-sm font-medium text-gray-700">2. Representante:</label>
-                        <input type="text" id="fornecedor-representante" required class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-blue-500" title="Nome do contato comercial">
+                        <label for="fornecedor-representante" class="block text-sm font-medium text-gray-700">2.
+                            Representante:</label>
+                        <input type="text" id="fornecedor-representante" required
+                            class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-blue-500"
+                            title="Nome do contato comercial">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label for="fornecedor-especialidade" class="block text-sm font-medium text-gray-700">3. Especialidade:</label>
-                        <input type="text" id="fornecedor-especialidade" required class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-blue-500" title="Tipo de material que fornece (Ex: Microeletrônica)">
+                        <label for="fornecedor-especialidade" class="block text-sm font-medium text-gray-700">3.
+                            Especialidade:</label>
+                        <input type="text" id="fornecedor-especialidade" required
+                            class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-blue-500"
+                            title="Tipo de material que fornece (Ex: Microeletrônica)">
                     </div>
                     <div>
-                        <label for="fornecedor-telefone" class="block text-sm font-medium text-gray-700">4. Telefone:</label>
-                        <input type="tel" id="fornecedor-telefone" class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-blue-500" title="Telefone de contato">
+                        <label for="fornecedor-telefone" class="block text-sm font-medium text-gray-700">4.
+                            Telefone:</label>
+                        <input type="tel" id="fornecedor-telefone"
+                            class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-blue-500"
+                            title="Telefone de contato">
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label for="fornecedor-cnpj" class="block text-sm font-medium text-gray-700">5. CNPJ:</label>
-                        <input type="text" id="fornecedor-cnpj" required class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-blue-500" title="CNPJ da empresa">
+                        <input type="text" id="fornecedor-cnpj" required
+                            class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-blue-500"
+                            title="CNPJ da empresa">
                     </div>
                     <div>
-                        <label for="fornecedor-prazoEntrega" class="block text-sm font-medium text-gray-700">6. Prazo de Entrega:</label>
-                        <input type="text" id="fornecedor-prazoEntrega" required class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-blue-500" title="Prazo médio de entrega (Ex: 5 dias)">
+                        <label for="fornecedor-prazoEntrega" class="block text-sm font-medium text-gray-700">6. Prazo de
+                            Entrega:</label>
+                        <input type="text" id="fornecedor-prazoEntrega" required
+                            class="mt-1 block w-full p-2 border border-gray-300 rounded focus:border-blue-500"
+                            title="Prazo médio de entrega (Ex: 5 dias)">
                     </div>
                 </div>
 
                 <div class="pt-4 flex justify-end space-x-3">
-                    <a href="lista-fornecedores.html" class="bg-gray-400 text-white p-2 rounded hover:bg-gray-500 transition" title="Descartar alterações e voltar à lista">Cancelar</a>
-                    <button type="submit" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition" title="Salvar os dados do fornecedor">Salvar Fornecedor</button>
+                    <a href="lista-fornecedores.html"
+                        class="bg-gray-400 text-white p-2 rounded hover:bg-gray-500 transition"
+                        title="Descartar alterações e voltar à lista">Cancelar</a>
+                    <button type="submit" class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition"
+                        title="Salvar os dados do fornecedor">Salvar Fornecedor</button>
                 </div>
             </form>
         </section>
@@ -75,79 +122,7 @@
         Sistema Engenharia | HTML, CSS & JavaScript
     </footer>
 
-    <script>
-        const DADOS_INICIAIS = {
-            fornecedores: [{"id":1,"nome":"Componentes Master","representante":"João Goulart","telefone":"4000-1111","cnpj":"12.000.000/0001-00","especialidade":"Microeletrônica","prazoEntrega":"10 dias"},{"id":2,"nome":"Aços e Metais BR","representante":"Bianca Silva","telefone":"4000-2222","cnpj":"22.000.000/0001-00","especialidade":"Fixadores e Perfis","prazoEntrega":"5 dias"},{"id":3,"nome":"Máquinas Precisas","representante":"André Lima","telefone":"4000-3333","cnpj":"32.000.000/0001-00","especialidade":"Motores e Atuadores","prazoEntrega":"15 dias"},{"id":4,"nome":"Plásticos Industriais","representante":"Sofia Nunes","telefone":"4000-4444","cnpj":"42.000.000/0001-00","especialidade":"Injeção e Moldagem","prazoEntrega":"20 dias"},{"id":5,"nome":"Elétrica Total","representante":"Marcelo Ruiz","telefone":"4000-5555","cnpj":"52.000.000/0001-00","especialidade":"Cabos e Fios","prazoEntrega":"3 dias"},{"id":6,"nome":"Medição Científica","representante":"Vanessa Melo","telefone":"4000-6666","cnpj":"62.000.000/0001-00","especialidade":"Sensores","prazoEntrega":"12 dias"},{"id":7,"nome":"Hidro & Válvulas","representante":"Paulo Souza","telefone":"4000-7777","cnpj":"72.000.000/0001-00","especialidade":"Hidráulica e Pneumática","prazoEntrega":"7 dias"},{"id":8,"nome":"Mecânica Simples","representante":"Rafael Costa","telefone":"4000-8888","cnpj":"82.000.000/0001-00","especialidade":"Pinos e Buchas","prazoEntrega":"4 dias"},{"id":9,"nome":"Testes e Reparos","representante":"Laura Silva","telefone":"4000-9999","cnpj":"92.000.000/0001-00","especialidade":"Ferramental","prazoEntrega":"6 dias"},{"id":10,"nome":"Baterias Power","representante":"Henrique Guedes","telefone":"4000-0000","cnpj":"13.000.000/0001-00","especialidade":"Fontes de Energia","prazoEntrega":"8 dias"}],
-            listaCompras: { cliente: null, fornecedor: null, produtos: [] }
-        };
-
-        function salvarDados(chave, dados) { localStorage.setItem(chave, JSON.stringify(dados)); }
-        function carregarDados(chave) { 
-            const dadosSalvos = localStorage.getItem(chave);
-            if (dadosSalvos) return JSON.parse(dadosSalvos);
-            salvarDados(chave, DADOS_INICIAIS[chave]);
-            return DADOS_INICIAIS[chave];
-        }
-
-        function getNextId(lista) {
-            if (lista.length === 0) return 1;
-            const ids = lista.map(item => item.id).filter(id => typeof id === 'number');
-            if (ids.length === 0) return 1;
-            return Math.max(...ids) + 1;
-        }
-
-        function getItemIdFromUrl() {
-            const params = new URLSearchParams(window.location.search);
-            return parseInt(params.get('id'));
-        }
-
-        function preencherFormularioFornecedor() {
-            const id = getItemIdFromUrl();
-            if (!id) return;
-            const fornecedores = carregarDados('fornecedores');
-            const fornecedor = fornecedores.find(f => f.id === id);
-
-            if (fornecedor) {
-                document.getElementById('fornecedor-id').value = fornecedor.id;
-                document.getElementById('fornecedor-nome').value = fornecedor.nome;
-                document.getElementById('fornecedor-representante').value = fornecedor.representante;
-                document.getElementById('fornecedor-telefone').value = fornecedor.telefone;
-                document.getElementById('fornecedor-cnpj').value = fornecedor.cnpj;
-                document.getElementById('fornecedor-especialidade').value = fornecedor.especialidade;
-                document.getElementById('fornecedor-prazoEntrega').value = fornecedor.prazoEntrega;
-            }
-        }
-
-        function salvarFornecedor(e) {
-            e.preventDefault();
-            let fornecedores = carregarDados('fornecedores');
-            const id = parseInt(document.getElementById('fornecedor-id').value);
-            
-            const fornecedorNovo = {
-                nome: document.getElementById('fornecedor-nome').value,
-                representante: document.getElementById('fornecedor-representante').value,
-                telefone: document.getElementById('fornecedor-telefone').value,
-                cnpj: document.getElementById('fornecedor-cnpj').value,
-                especialidade: document.getElementById('fornecedor-especialidade').value,
-                prazoEntrega: document.getElementById('fornecedor-prazoEntrega').value
-            };
-
-            if (id) {
-                const index = fornecedores.findIndex(f => f.id === id);
-                if (index !== -1) fornecedores[index] = { id: id, ...fornecedorNovo };
-            } else {
-                fornecedorNovo.id = getNextId(fornecedores);
-                fornecedores.push(fornecedorNovo);
-            }
-
-            salvarDados('fornecedores', fornecedores);
-            window.location.href = 'lista-fornecedores.html';
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            preencherFormularioFornecedor();
-            document.getElementById('form-fornecedor').onsubmit = salvarFornecedor;
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
+
 </html>

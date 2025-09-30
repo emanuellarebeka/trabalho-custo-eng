@@ -1,27 +1,60 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Produtos - Engenharia</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @media (min-width: 801px) { body { background-color: #bfdbfe; } }
-        @media (min-width: 501px) and (max-width: 800px) { body { background-color: #d1fae5; } }
-        @media (max-width: 500px) { body { background-color: #fef9c3; } }
-        button:focus, a:focus, input:focus, select:focus { outline: 2px solid #ef4444; outline-offset: 2px; }
-        .crud-table th, .crud-table td { padding: 8px 12px; border: 1px solid #e5e7eb; text-align: left; }
+        @media (min-width: 801px) {
+            body {
+                background-color: #bfdbfe;
+            }
+        }
+
+        @media (min-width: 501px) and (max-width: 800px) {
+            body {
+                background-color: #d1fae5;
+            }
+        }
+
+        @media (max-width: 500px) {
+            body {
+                background-color: #fef9c3;
+            }
+        }
+
+        button:focus,
+        a:focus,
+        input:focus,
+        select:focus {
+            outline: 2px solid #ef4444;
+            outline-offset: 2px;
+        }
+
+        .crud-table th,
+        .crud-table td {
+            padding: 8px 12px;
+            border: 1px solid #e5e7eb;
+            text-align: left;
+        }
     </style>
 </head>
+
 <body class="min-h-screen flex flex-col">
     <header class="bg-red-600 text-white p-4 shadow-lg flex flex-wrap justify-between items-center">
         <h1 class="text-2xl font-bold mb-2 md:mb-0">Setor Engenharia de Custos</h1>
         <nav class="flex flex-wrap space-x-2 md:space-x-4 text-sm md:text-base">
             <a href="index.html" class="hover:bg-red-700 p-2 rounded transition" title="Menu Principal">Home</a>
-            <a href="lista-produtos.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Peças/Componentes">Produtos</a>
-            <a href="lista-clientes.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Clientes">Clientes</a>
-            <a href="lista-fornecedores.html" class="hover:bg-red-700 p-2 rounded transition" title="Cadastro e Listagem de Fornecedores">Fornecedores</a>
-            <a href="lista-compras.html" class="hover:bg-red-700 p-2 rounded transition" title="Lista de Peças a serem solicitadas">Lista de Compras</a>
+            <a href="lista-produtos.html" class="hover:bg-red-700 p-2 rounded transition"
+                title="Cadastro e Listagem de Peças/Componentes">Produtos</a>
+            <a href="lista-clientes.html" class="hover:bg-red-700 p-2 rounded transition"
+                title="Cadastro e Listagem de Clientes">Clientes</a>
+            <a href="lista-fornecedores.html" class="hover:bg-red-700 p-2 rounded transition"
+                title="Cadastro e Listagem de Fornecedores">Fornecedores</a>
+            <a href="lista-compras.html" class="hover:bg-red-700 p-2 rounded transition"
+                title="Lista de Peças a serem solicitadas">Lista de Compras</a>
         </nav>
     </header>
 
@@ -30,8 +63,12 @@
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-semibold text-green-600">Itens Cadastrados</h2>
                 <div class="flex space-x-3">
-                    <button id="btn-reset-produtos" class="bg-gray-500 text-white p-2 rounded hover:bg-gray-600 transition text-sm" title="Restaura a lista de produtos aos 10 exemplos originais">Reset</button>
-                    <a href="cadastro-produto.html" class="bg-green-500 text-white p-2 rounded hover:bg-green-600 transition" title="Adicionar um novo produto ao sistema">Novo Produto</a>
+                    <button id="btn-reset-produtos"
+                        class="bg-gray-500 text-white p-2 rounded hover:bg-gray-600 transition text-sm"
+                        title="Restaura a lista de produtos aos 10 exemplos originais">Reset</button>
+                    <a href="cadastro-produto.html"
+                        class="bg-green-500 text-white p-2 rounded hover:bg-green-600 transition"
+                        title="Adicionar um novo produto ao sistema">Novo Produto</a>
                 </div>
             </div>
             <div class="overflow-x-auto">
@@ -58,97 +95,7 @@
         Sistema Engenharia | HTML, CSS & JavaScript
     </footer>
 
-    <script>
-        const DADOS_INICIAIS = {
-            produtos: [{"id":1,"nome":"Cimento CP-II 50kg","preco":35.5,"projeto":"Estrutura","fabricante":"Cimex","unidade":"Saco","dataAquisicao":"2025-01-10"},{"id":2,"nome":"Vergalhão CA-50 10mm","preco":48.9,"projeto":"Armação","fabricante":"Aço Forte","unidade":"Barra","dataAquisicao":"2024-08-20"},{"id":3,"nome":"Tubo PVC 100mm","preco":22.75,"projeto":"Hidráulica","fabricante":"Tigre","unidade":"Metro","dataAquisicao":"2025-05-01"},{"id":4,"nome":"Bloco Cerâmico 14x19x29","preco":1.5,"projeto":"Alvenaria","fabricante":"Ceramica Sul","unidade":"Unidade","dataAquisicao":"2025-06-15"},{"id":5,"nome":"Fio Rígido 2.5mm²","preco":1.9,"projeto":"Elétrica","fabricante":"EletroCabos","unidade":"Metro","dataAquisicao":"2025-03-22"},{"id":6,"nome":"Argamassa AC-III 20kg","preco":18,"projeto":"Acabamento","fabricante":"Quartzolit","unidade":"Saco","dataAquisicao":"2025-02-05"},{"id":7,"nome":"Telha Ondulada 6mm","preco":45,"projeto":"Cobertura","fabricante":"Brasilit","unidade":"Peça","dataAquisicao":"2025-01-01"},{"id":8,"nome":"Conexão Joelho 90º 50mm","preco":3.5,"projeto":"Hidráulica","fabricante":"Amanco","unidade":"Unidade","dataAquisicao":"2025-04-12"},{"id":9,"nome":"Areia Lavada Média","preco":80,"projeto":"Concreto","fabricante":"Mineração Alpha","unidade":"m³","dataAquisicao":"2024-11-30"},{"id":10,"nome":"Disjuntor Bipolar 20A","preco":15.2,"projeto":"Elétrica","fabricante":"Siemens","unidade":"Unidade","dataAquisicao":"2025-07-01"}],
-            listaCompras: { cliente: null, fornecedor: null, produtos: [] }
-        };
-        
-        function salvarDados(chave, dados) { localStorage.setItem(chave, JSON.stringify(dados)); }
-        function carregarDados(chave) { 
-            const dadosSalvos = localStorage.getItem(chave);
-            if (dadosSalvos) {
-                try {
-                    const parsed = JSON.parse(dadosSalvos);
-                    return parsed;
-                } catch (e) {
-                    console.error(`Erro ao carregar ${chave}, resetando...`, e);
-                }
-            }
-            salvarDados(chave, DADOS_INICIAIS[chave]);
-            return DADOS_INICIAIS[chave];
-        }
-
-        function renderizarTabelaProdutos() {
-            const produtos = carregarDados('produtos');
-            const tbody = document.getElementById('tabela-produtos').querySelector('tbody');
-            if (!tbody) return;
-            tbody.innerHTML = '';
-
-            produtos.forEach(produto => {
-                const tr = document.createElement('tr');
-                tr.className = 'hover:bg-gray-50 transition';
-                
-                tr.innerHTML = `
-                    <td>${produto.nome}</td>
-                    <td>R$ ${produto.preco.toFixed(2).replace('.', ',')}</td>
-                    <td>${produto.projeto}</td>
-                    <td>${produto.fabricante}</td>
-                    <td>${produto.unidade}</td>
-                    <td>${produto.dataAquisicao}</td>
-                    <td class="space-x-2">
-                        <a href="cadastro-produto.html?id=${produto.id}" class="text-white p-1 rounded text-sm bg-green-500 hover:bg-green-600" title="Abrir formulário para editar os dados">Editar</a>
-                        <button onclick="adicionarProdutoALista(${produto.id})" class="text-white p-1 rounded text-sm bg-red-600 hover:bg-red-700" title="Adicionar 1 unidade deste item à Lista de Compras">Adicionar à Lista</button>
-                        <button onclick="excluirProduto(${produto.id})" class="text-white p-1 rounded text-sm bg-red-500 hover:bg-red-600" title="Excluir o produto do cadastro">Excluir</button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function adicionarProdutoALista(id) {
-            const produtos = carregarDados('produtos');
-            const produto = produtos.find(p => p.id === id);
-            if (!produto) return;
-
-            let listaCompras = carregarDados('listaCompras'); 
-            const itemExistente = listaCompras.produtos.find(item => item.id === id);
-
-            if (itemExistente) {
-                itemExistente.quantidade++;
-            } else {
-                listaCompras.produtos.push({
-                    id: produto.id,
-                    nome: produto.nome,
-                    preco: produto.preco,
-                    quantidade: 1
-                });
-            }
-
-            salvarDados('listaCompras', listaCompras);
-        }
-
-        function excluirProduto(id) {
-            if (!confirm('CONFIRMAR EXCLUSÃO: Tem certeza que deseja excluir esta peça?')) return;
-            
-            let produtos = carregarDados('produtos');
-            produtos = produtos.filter(p => p.id !== id);
-            salvarDados('produtos', produtos);
-            
-            window.location.reload(); 
-        }
-
-        function resetarProdutos() {
-            if (confirm('Tem certeza que deseja RESETAR os dados de Produtos?')) {
-                salvarDados('produtos', DADOS_INICIAIS.produtos);
-                window.location.reload();
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            renderizarTabelaProdutos();
-            document.getElementById('btn-reset-produtos').onclick = resetarProdutos;
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
+
 </html>
