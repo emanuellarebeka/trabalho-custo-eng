@@ -9,7 +9,14 @@ function salvarDados(chave, dados) { localStorage.setItem(chave, JSON.stringify(
 
 function carregarDados(chave) {
     const dadosSalvos = localStorage.getItem(chave);
-    if (dadosSalvos) return JSON.parse(dadosSalvos);
+    if (dadosSalvos) {
+        try {
+            const parsed = JSON.parse(dadosSalvos);
+            return parsed;
+        } catch (e) {
+            console.error(`Erro ao carregar ${chave}, resetando...`, e);
+        }
+    }
     salvarDados(chave, DADOS_INICIAIS[chave]);
     return DADOS_INICIAIS[chave];
 }
@@ -33,28 +40,43 @@ function preencherFormularioCliente() {
     const cliente = clientes.find(c => c.id === id);
 
     if (cliente) {
-        document.getElementById('cliente-id').value = cliente.id;
-        document.getElementById('cliente-nome').value = cliente.nome;
-        document.getElementById('cliente-contato').value = cliente.contato;
-        document.getElementById('cliente-telefone').value = cliente.telefone;
-        document.getElementById('cliente-cnpj').value = cliente.cnpj;
-        document.getElementById('cliente-setor').value = cliente.setor;
-        document.getElementById('cliente-email').value = cliente.email;
+        const clienteIdElement = document.getElementById('cliente-id');
+        if (clienteIdElement) clienteIdElement.value = cliente.id;
+        const clienteNomeElement = document.getElementById('cliente-nome');
+        if (clienteNomeElement) clienteNomeElement.value = cliente.nome;
+        const clienteContatoElement = document.getElementById('cliente-contato');
+        if (clienteContatoElement) clienteContatoElement.value = cliente.contato;
+        const clienteTelefoneElement = document.getElementById('cliente-telefone');
+        if (clienteTelefoneElement) clienteTelefoneElement.value = cliente.telefone;
+        const clienteCnpjElement = document.getElementById('cliente-cnpj');
+        if (clienteCnpjElement) clienteCnpjElement.value = cliente.cnpj;
+        const clienteSetorElement = document.getElementById('cliente-setor');
+        if (clienteSetorElement) clienteSetorElement.value = cliente.setor;
+        const clienteEmailElement = document.getElementById('cliente-email');
+        if (clienteEmailElement) clienteEmailElement.value = cliente.email;
     }
 }
 
 function salvarCliente(e) {
     e.preventDefault();
     let clientes = carregarDados('clientes');
-    const id = parseInt(document.getElementById('cliente-id').value);
+    const clienteIdElement = document.getElementById('cliente-id');
+    const id = clienteIdElement ? parseInt(clienteIdElement.value) : null;
+
+    const clienteNomeElement = document.getElementById('cliente-nome');
+    const clienteContatoElement = document.getElementById('cliente-contato');
+    const clienteTelefoneElement = document.getElementById('cliente-telefone');
+    const clienteCnpjElement = document.getElementById('cliente-cnpj');
+    const clienteSetorElement = document.getElementById('cliente-setor');
+    const clienteEmailElement = document.getElementById('cliente-email');
 
     const clienteNovo = {
-        nome: document.getElementById('cliente-nome').value,
-        contato: document.getElementById('cliente-contato').value,
-        telefone: document.getElementById('cliente-telefone').value,
-        cnpj: document.getElementById('cliente-cnpj').value,
-        setor: document.getElementById('cliente-setor').value,
-        email: document.getElementById('cliente-email').value
+        nome: clienteNomeElement ? clienteNomeElement.value : '',
+        contato: clienteContatoElement ? clienteContatoElement.value : '',
+        telefone: clienteTelefoneElement ? clienteTelefoneElement.value : '',
+        cnpj: clienteCnpjElement ? clienteCnpjElement.value : '',
+        setor: clienteSetorElement ? clienteSetorElement.value : '',
+        email: clienteEmailElement ? clienteEmailElement.value : ''
     };
 
     if (id) {
@@ -71,29 +93,9 @@ function salvarCliente(e) {
 
 document.addEventListener('DOMContentLoaded', () => {
     preencherFormularioCliente();
-    document.getElementById('form-cliente').onsubmit = salvarCliente;
+    const formCliente = document.getElementById('form-cliente');
+    if (formCliente) formCliente.onsubmit = salvarCliente;
 });
-
-function salvarDados(chave, dados) { localStorage.setItem(chave, JSON.stringify(dados)); }
-
-function carregarDados(chave) {
-    const dadosSalvos = localStorage.getItem(chave);
-    if (dadosSalvos) return JSON.parse(dadosSalvos);
-    salvarDados(chave, DADOS_INICIAIS[chave]);
-    return DADOS_INICIAIS[chave];
-}
-
-function getNextId(lista) {
-    if (lista.length === 0) return 1;
-    const ids = lista.map(item => item.id).filter(id => typeof id === 'number');
-    if (ids.length === 0) return 1;
-    return Math.max(...ids) + 1;
-}
-
-function getItemIdFromUrl() {
-    const params = new URLSearchParams(window.location.search);
-    return parseInt(params.get('id'));
-}
 
 function preencherFormularioFornecedor() {
     const id = getItemIdFromUrl();
@@ -102,28 +104,43 @@ function preencherFormularioFornecedor() {
     const fornecedor = fornecedores.find(f => f.id === id);
 
     if (fornecedor) {
-        document.getElementById('fornecedor-id').value = fornecedor.id;
-        document.getElementById('fornecedor-nome').value = fornecedor.nome;
-        document.getElementById('fornecedor-representante').value = fornecedor.representante;
-        document.getElementById('fornecedor-telefone').value = fornecedor.telefone;
-        document.getElementById('fornecedor-cnpj').value = fornecedor.cnpj;
-        document.getElementById('fornecedor-especialidade').value = fornecedor.especialidade;
-        document.getElementById('fornecedor-prazoEntrega').value = fornecedor.prazoEntrega;
+        const fornecedorIdElement = document.getElementById('fornecedor-id');
+        if (fornecedorIdElement) fornecedorIdElement.value = fornecedor.id;
+        const fornecedorNomeElement = document.getElementById('fornecedor-nome');
+        if (fornecedorNomeElement) fornecedorNomeElement.value = fornecedor.nome;
+        const fornecedorRepresentanteElement = document.getElementById('fornecedor-representante');
+        if (fornecedorRepresentanteElement) fornecedorRepresentanteElement.value = fornecedor.representante;
+        const fornecedorTelefoneElement = document.getElementById('fornecedor-telefone');
+        if (fornecedorTelefoneElement) fornecedorTelefoneElement.value = fornecedor.telefone;
+        const fornecedorCnpjElement = document.getElementById('fornecedor-cnpj');
+        if (fornecedorCnpjElement) fornecedorCnpjElement.value = fornecedor.cnpj;
+        const fornecedorEspecialidadeElement = document.getElementById('fornecedor-especialidade');
+        if (fornecedorEspecialidadeElement) fornecedorEspecialidadeElement.value = fornecedor.especialidade;
+        const fornecedorPrazoEntregaElement = document.getElementById('fornecedor-prazoEntrega');
+        if (fornecedorPrazoEntregaElement) fornecedorPrazoEntregaElement.value = fornecedor.prazoEntrega;
     }
 }
 
 function salvarFornecedor(e) {
     e.preventDefault();
     let fornecedores = carregarDados('fornecedores');
-    const id = parseInt(document.getElementById('fornecedor-id').value);
+    const fornecedorIdElement = document.getElementById('fornecedor-id');
+    const id = fornecedorIdElement ? parseInt(fornecedorIdElement.value) : null;
+
+    const fornecedorNomeElement = document.getElementById('fornecedor-nome');
+    const fornecedorRepresentanteElement = document.getElementById('fornecedor-representante');
+    const fornecedorTelefoneElement = document.getElementById('fornecedor-telefone');
+    const fornecedorCnpjElement = document.getElementById('fornecedor-cnpj');
+    const fornecedorEspecialidadeElement = document.getElementById('fornecedor-especialidade');
+    const fornecedorPrazoEntregaElement = document.getElementById('fornecedor-prazoEntrega');
 
     const fornecedorNovo = {
-        nome: document.getElementById('fornecedor-nome').value,
-        representante: document.getElementById('fornecedor-representante').value,
-        telefone: document.getElementById('fornecedor-telefone').value,
-        cnpj: document.getElementById('fornecedor-cnpj').value,
-        especialidade: document.getElementById('fornecedor-especialidade').value,
-        prazoEntrega: document.getElementById('fornecedor-prazoEntrega').value
+        nome: fornecedorNomeElement ? fornecedorNomeElement.value : '',
+        representante: fornecedorRepresentanteElement ? fornecedorRepresentanteElement.value : '',
+        telefone: fornecedorTelefoneElement ? fornecedorTelefoneElement.value : '',
+        cnpj: fornecedorCnpjElement ? fornecedorCnpjElement.value : '',
+        especialidade: fornecedorEspecialidadeElement ? fornecedorEspecialidadeElement.value : '',
+        prazoEntrega: fornecedorPrazoEntregaElement ? fornecedorPrazoEntregaElement.value : ''
     };
 
     if (id) {
@@ -140,29 +157,9 @@ function salvarFornecedor(e) {
 
 document.addEventListener('DOMContentLoaded', () => {
     preencherFormularioFornecedor();
-    document.getElementById('form-fornecedor').onsubmit = salvarFornecedor;
+    const formFornecedor = document.getElementById('form-fornecedor');
+    if (formFornecedor) formFornecedor.onsubmit = salvarFornecedor;
 });
-
-function salvarDados(chave, dados) { localStorage.setItem(chave, JSON.stringify(dados)); }
-
-function carregarDados(chave) {
-    const dadosSalvos = localStorage.getItem(chave);
-    if (dadosSalvos) return JSON.parse(dadosSalvos);
-    salvarDados(chave, DADOS_INICIAIS[chave]);
-    return DADOS_INICIAIS[chave];
-}
-
-function getNextId(lista) {
-    if (lista.length === 0) return 1;
-    const ids = lista.map(item => item.id).filter(id => typeof id === 'number');
-    if (ids.length === 0) return 1;
-    return Math.max(...ids) + 1;
-}
-
-function getItemIdFromUrl() {
-    const params = new URLSearchParams(window.location.search);
-    return parseInt(params.get('id'));
-}
 
 function preencherFormularioProduto() {
     const id = getItemIdFromUrl();
@@ -172,28 +169,43 @@ function preencherFormularioProduto() {
     const produto = produtos.find(p => p.id === id);
 
     if (produto) {
-        document.getElementById('produto-id').value = produto.id;
-        document.getElementById('produto-nome').value = produto.nome;
-        document.getElementById('produto-preco').value = produto.preco;
-        document.getElementById('produto-projeto').value = produto.projeto;
-        document.getElementById('produto-fabricante').value = produto.fabricante;
-        document.getElementById('produto-unidade').value = produto.unidade;
-        document.getElementById('produto-dataAquisicao').value = produto.dataAquisicao;
+        const produtoIdElement = document.getElementById('produto-id');
+        if (produtoIdElement) produtoIdElement.value = produto.id;
+        const produtoNomeElement = document.getElementById('produto-nome');
+        if (produtoNomeElement) produtoNomeElement.value = produto.nome;
+        const produtoPrecoElement = document.getElementById('produto-preco');
+        if (produtoPrecoElement) produtoPrecoElement.value = produto.preco;
+        const produtoProjetoElement = document.getElementById('produto-projeto');
+        if (produtoProjetoElement) produtoProjetoElement.value = produto.projeto;
+        const produtoFabricanteElement = document.getElementById('produto-fabricante');
+        if (produtoFabricanteElement) produtoFabricanteElement.value = produto.fabricante;
+        const produtoUnidadeElement = document.getElementById('produto-unidade');
+        if (produtoUnidadeElement) produtoUnidadeElement.value = produto.unidade;
+        const produtoDataAquisicaoElement = document.getElementById('produto-dataAquisicao');
+        if (produtoDataAquisicaoElement) produtoDataAquisicaoElement.value = produto.dataAquisicao;
     }
 }
 
 function salvarProduto(e) {
     e.preventDefault();
     let produtos = carregarDados('produtos');
-    const id = parseInt(document.getElementById('produto-id').value);
+    const produtoIdElement = document.getElementById('produto-id');
+    const id = produtoIdElement ? parseInt(produtoIdElement.value) : null;
+
+    const produtoNomeElement = document.getElementById('produto-nome');
+    const produtoPrecoElement = document.getElementById('produto-preco');
+    const produtoProjetoElement = document.getElementById('produto-projeto');
+    const produtoFabricanteElement = document.getElementById('produto-fabricante');
+    const produtoUnidadeElement = document.getElementById('produto-unidade');
+    const produtoDataAquisicaoElement = document.getElementById('produto-dataAquisicao');
 
     const produtoNovo = {
-        nome: document.getElementById('produto-nome').value,
-        preco: parseFloat(document.getElementById('produto-preco').value),
-        projeto: document.getElementById('produto-projeto').value,
-        fabricante: document.getElementById('produto-fabricante').value,
-        unidade: document.getElementById('produto-unidade').value,
-        dataAquisicao: document.getElementById('produto-dataAquisicao').value
+        nome: produtoNomeElement ? produtoNomeElement.value : '',
+        preco: produtoPrecoElement ? parseFloat(produtoPrecoElement.value) : 0,
+        projeto: produtoProjetoElement ? produtoProjetoElement.value : '',
+        fabricante: produtoFabricanteElement ? produtoFabricanteElement.value : '',
+        unidade: produtoUnidadeElement ? produtoUnidadeElement.value : '',
+        dataAquisicao: produtoDataAquisicaoElement ? produtoDataAquisicaoElement.value : ''
     };
 
     if (id) {
@@ -210,24 +222,9 @@ function salvarProduto(e) {
 
 document.addEventListener('DOMContentLoaded', () => {
     preencherFormularioProduto();
-    document.getElementById('form-produto').onsubmit = salvarProduto;
+    const formProduto = document.getElementById('form-produto');
+    if (formProduto) formProduto.onsubmit = salvarProduto;
 });
-
-function salvarDados(chave, dados) { localStorage.setItem(chave, JSON.stringify(dados)); }
-
-function carregarDados(chave) {
-    const dadosSalvos = localStorage.getItem(chave);
-    if (dadosSalvos) {
-        try {
-            const parsed = JSON.parse(dadosSalvos);
-            return parsed;
-        } catch (e) {
-            console.error(`Erro ao carregar ${chave}, resetando...`, e);
-        }
-    }
-    salvarDados(chave, DADOS_INICIAIS[chave]);
-    return DADOS_INICIAIS[chave];
-}
 
 document.addEventListener('DOMContentLoaded', () => {
     carregarDados('produtos');
@@ -236,18 +233,10 @@ document.addEventListener('DOMContentLoaded', () => {
     carregarDados('listaCompras');
 });
 
-function salvarDados(chave, dados) { localStorage.setItem(chave, JSON.stringify(dados)); }
-
-function carregarDados(chave) {
-    const dadosSalvos = localStorage.getItem(chave);
-    if (dadosSalvos) return JSON.parse(dadosSalvos);
-    salvarDados(chave, DADOS_INICIAIS[chave]);
-    return DADOS_INICIAIS[chave];
-}
-
 function renderizarTabelaClientes() {
     const clientes = carregarDados('clientes');
-    const tbody = document.getElementById('tabela-clientes').querySelector('tbody');
+    const tabelaClientesElement = document.getElementById('tabela-clientes');
+    const tbody = tabelaClientesElement ? tabelaClientesElement.querySelector('tbody') : null;
     if (!tbody) return;
     tbody.innerHTML = '';
 
@@ -256,17 +245,17 @@ function renderizarTabelaClientes() {
         tr.className = 'hover:bg-gray-50 transition';
 
         tr.innerHTML = `
-                    <td>${cliente.nome}</td>
-                    <td>${cliente.contato}</td>
-                    <td>${cliente.setor}</td>
-                    <td>${cliente.telefone}</td>
-                    <td>${cliente.cnpj}</td>
-                    <td>${cliente.email}</td>
-                    <td class="space-x-2 whitespace-nowrap">
-                        <a href="cadastro-cliente.html?id=${cliente.id}" class="text-white p-1 rounded text-sm bg-yellow-500 hover:bg-yellow-600" title="Abrir formulário para editar os dados">Editar</a>
-                        <button onclick="adicionarClienteALista(${cliente.id})" class="text-white p-1 rounded text-sm bg-red-600 hover:bg-red-700" title="Define este cliente como o destinatário da Lista de Compras">Definir Cliente</button>
-                        <button onclick="excluirCliente(${cliente.id})" class="text-white p-1 rounded text-sm bg-red-500 hover:bg-red-600" title="Excluir o cliente do cadastro">Excluir</button>
-                    </td>
+                        <td>${cliente.nome}</td>
+                        <td>${cliente.contato}</td>
+                        <td>${cliente.setor}</td>
+                        <td>${cliente.telefone}</td>
+                        <td>${cliente.cnpj}</td>
+                        <td>${cliente.email}</td>
+                        <td class="space-x-2 whitespace-nowrap">
+                            <a href="cadastro-cliente.html?id=${cliente.id}" class="text-white p-1 rounded text-sm bg-yellow-500 hover:bg-yellow-600" title="Abrir formulário para editar os dados">Editar</a>
+                            <button onclick="adicionarClienteALista(${cliente.id})" class="text-white p-1 rounded text-sm bg-red-600 hover:bg-red-700" title="Define este cliente como o destinatário da Lista de Compras">Definir Cliente</button>
+                            <button onclick="excluirCliente(${cliente.id})" class="text-white p-1 rounded text-sm bg-red-500 hover:bg-red-600" title="Excluir o cliente do cadastro">Excluir</button>
+                        </td>
                 `;
         tbody.appendChild(tr);
     });
@@ -296,24 +285,9 @@ function resetarClientes() {
 
 document.addEventListener('DOMContentLoaded', () => {
     renderizarTabelaClientes();
-    document.getElementById('btn-reset-clientes').onclick = resetarClientes;
+    const btnResetClientes = document.getElementById('btn-reset-clientes');
+    if (btnResetClientes) btnResetClientes.onclick = resetarClientes;
 });
-
-function salvarDados(chave, dados) { localStorage.setItem(chave, JSON.stringify(dados)); }
-
-function carregarDados(chave) {
-    const dadosSalvos = localStorage.getItem(chave);
-    if (dadosSalvos) {
-        try {
-            const parsed = JSON.parse(dadosSalvos);
-            return parsed;
-        } catch (e) {
-            console.error(`Erro ao carregar ${chave}, resetando...`, e);
-        }
-    }
-    salvarDados(chave, DADOS_INICIAIS[chave]);
-    return DADOS_INICIAIS[chave];
-}
 
 function renderizarListaCompras() {
     const lista = carregarDados('listaCompras');
@@ -327,8 +301,10 @@ function renderizarListaCompras() {
     const cliente = clientes.find(c => c.id === lista.cliente) || { nome: "NENHUM SELECIONADO" };
     const fornecedor = fornecedores.find(f => f.id === lista.fornecedor) || { nome: "NENHUM SELECIONADO" };
 
-    document.getElementById('cliente-compra').textContent = cliente.nome;
-    document.getElementById('fornecedor-compra').textContent = fornecedor.nome;
+    const clienteCompraElement = document.getElementById('cliente-compra');
+    if (clienteCompraElement) clienteCompraElement.textContent = cliente.nome;
+    const fornecedorCompraElement = document.getElementById('fornecedor-compra');
+    if (fornecedorCompraElement) fornecedorCompraElement.textContent = fornecedor.nome;
 
     ulProdutos.innerHTML = '';
     let totalGeral = 0;
@@ -356,7 +332,7 @@ function renderizarListaCompras() {
                         </div>
                         <span class="font-semibold mr-4 w-20 text-right">R$ ${subtotal.toFixed(2).replace('.', ',')}</span>
                         <button onclick="removerItemCompra(${index})" class="text-red-500 hover:text-red-700 p-1 rounded transition text-sm" title="Remover este item da lista">X</button>
-                    `;
+                `;
             ulProdutos.appendChild(li);
         });
     }
@@ -404,22 +380,16 @@ function resetGeralCompra() {
 
 document.addEventListener('DOMContentLoaded', () => {
     renderizarListaCompras();
-    document.getElementById('btn-limpar-compra').onclick = limparListaCompra;
-    document.getElementById('btn-reset-compra').onclick = resetGeralCompra;
+    const btnLimparCompra = document.getElementById('btn-limpar-compra');
+    if (btnLimparCompra) btnLimparCompra.onclick = limparListaCompra;
+    const btnResetCompra = document.getElementById('btn-reset-compra');
+    if (btnResetCompra) btnResetCompra.onclick = resetGeralCompra;
 });
-
-function salvarDados(chave, dados) { localStorage.setItem(chave, JSON.stringify(dados)); }
-
-function carregarDados(chave) {
-    const dadosSalvos = localStorage.getItem(chave);
-    if (dadosSalvos) return JSON.parse(dadosSalvos);
-    salvarDados(chave, DADOS_INICIAIS[chave]);
-    return DADOS_INICIAIS[chave];
-}
 
 function renderizarTabelaFornecedores() {
     const fornecedores = carregarDados('fornecedores');
-    const tbody = document.getElementById('tabela-fornecedores').querySelector('tbody');
+    const tabelaFornecedoresElement = document.getElementById('tabela-fornecedores');
+    const tbody = tabelaFornecedoresElement ? tabelaFornecedoresElement.querySelector('tbody') : null;
     if (!tbody) return;
     tbody.innerHTML = '';
 
@@ -428,17 +398,17 @@ function renderizarTabelaFornecedores() {
         tr.className = 'hover:bg-gray-50 transition';
 
         tr.innerHTML = `
-                    <td>${fornecedor.nome}</td>
-                    <td>${fornecedor.representante}</td>
-                    <td>${fornecedor.especialidade}</td>
-                    <td>${fornecedor.telefone}</td>
-                    <td>${fornecedor.cnpj}</td>
-                    <td>${fornecedor.prazoEntrega}</td>
-                    <td class="space-x-2 whitespace-nowrap">
-                        <a href="cadastro-fornecedor.html?id=${fornecedor.id}" class="text-white p-1 rounded text-sm bg-blue-500 hover:bg-blue-600" title="Abrir formulário para editar os dados">Editar</a>
-                        <button onclick="adicionarFornecedorALista(${fornecedor.id})" class="text-white p-1 rounded text-sm bg-red-600 hover:bg-red-700" title="Define este fornecedor como o principal para a Lista de Compras">Definir Fornecedor</button>
-                        <button onclick="excluirFornecedor(${fornecedor.id})" class="text-white p-1 rounded text-sm bg-red-500 hover:bg-red-600" title="Excluir o fornecedor do cadastro">Excluir</button>
-                    </td>
+                        <td>${fornecedor.nome}</td>
+                        <td>${fornecedor.representante}</td>
+                        <td>${fornecedor.especialidade}</td>
+                        <td>${fornecedor.telefone}</td>
+                        <td>${fornecedor.cnpj}</td>
+                        <td>${fornecedor.prazoEntrega}</td>
+                        <td class="space-x-2 whitespace-nowrap">
+                            <a href="cadastro-fornecedor.html?id=${fornecedor.id}" class="text-white p-1 rounded text-sm bg-blue-500 hover:bg-blue-600" title="Abrir formulário para editar os dados">Editar</a>
+                            <button onclick="adicionarFornecedorALista(${fornecedor.id})" class="text-white p-1 rounded text-sm bg-red-600 hover:bg-red-700" title="Define este fornecedor como o principal para a Lista de Compras">Definir Fornecedor</button>
+                            <button onclick="excluirFornecedor(${fornecedor.id})" class="text-white p-1 rounded text-sm bg-red-500 hover:bg-red-600" title="Excluir o fornecedor do cadastro">Excluir</button>
+                        </td>
                 `;
         tbody.appendChild(tr);
     });
@@ -468,28 +438,14 @@ function resetarFornecedores() {
 
 document.addEventListener('DOMContentLoaded', () => {
     renderizarTabelaFornecedores();
-    document.getElementById('btn-reset-fornecedores').onclick = resetarFornecedores;
+    const btnResetFornecedores = document.getElementById('btn-reset-fornecedores');
+    if (btnResetFornecedores) btnResetFornecedores.onclick = resetarFornecedores;
 });
-
-function salvarDados(chave, dados) { localStorage.setItem(chave, JSON.stringify(dados)); }
-
-function carregarDados(chave) {
-    const dadosSalvos = localStorage.getItem(chave);
-    if (dadosSalvos) {
-        try {
-            const parsed = JSON.parse(dadosSalvos);
-            return parsed;
-        } catch (e) {
-            console.error(`Erro ao carregar ${chave}, resetando...`, e);
-        }
-    }
-    salvarDados(chave, DADOS_INICIAIS[chave]);
-    return DADOS_INICIAIS[chave];
-}
 
 function renderizarTabelaProdutos() {
     const produtos = carregarDados('produtos');
-    const tbody = document.getElementById('tabela-produtos').querySelector('tbody');
+    const tabelaProdutosElement = document.getElementById('tabela-produtos');
+    const tbody = tabelaProdutosElement ? tabelaProdutosElement.querySelector('tbody') : null;
     if (!tbody) return;
     tbody.innerHTML = '';
 
@@ -498,17 +454,17 @@ function renderizarTabelaProdutos() {
         tr.className = 'hover:bg-gray-50 transition';
 
         tr.innerHTML = `
-                    <td>${produto.nome}</td>
-                    <td>R$ ${produto.preco.toFixed(2).replace('.', ',')}</td>
-                    <td>${produto.projeto}</td>
-                    <td>${produto.fabricante}</td>
-                    <td>${produto.unidade}</td>
-                    <td>${produto.dataAquisicao}</td>
-                    <td class="space-x-2 whitespace-nowrap">
-                        <a href="cadastro-produto.html?id=${produto.id}" class="text-white p-1 rounded text-sm bg-green-500 hover:bg-green-600" title="Abrir formulário para editar os dados">Editar</a>
-                        <button onclick="adicionarProdutoALista(${produto.id})" class="text-white p-1 rounded text-sm bg-red-600 hover:bg-red-700" title="Adicionar 1 unidade deste item à Lista de Compras">Adicionar à Lista</button>
-                        <button onclick="excluirProduto(${produto.id})" class="text-white p-1 rounded text-sm bg-red-500 hover:bg-red-600" title="Excluir o produto do cadastro">Excluir</button>
-                    </td>
+                        <td>${produto.nome}</td>
+                        <td>R$ ${produto.preco.toFixed(2).replace('.', ',')}</td>
+                        <td>${produto.projeto}</td>
+                        <td>${produto.fabricante}</td>
+                        <td>${produto.unidade}</td>
+                        <td>${produto.dataAquisicao}</td>
+                        <td class="space-x-2 whitespace-nowrap">
+                            <a href="cadastro-produto.html?id=${produto.id}" class="text-white p-1 rounded text-sm bg-green-500 hover:bg-green-600" title="Abrir formulário para editar os dados">Editar</a>
+                            <button onclick="adicionarProdutoALista(${produto.id})" class="text-white p-1 rounded text-sm bg-red-600 hover:bg-red-700" title="Adicionar 1 unidade deste item à Lista de Compras">Adicionar à Lista</button>
+                            <button onclick="excluirProduto(${produto.id})" class="text-white p-1 rounded text-sm bg-red-500 hover:bg-red-600" title="Excluir o produto do cadastro">Excluir</button>
+                        </td>
                 `;
         tbody.appendChild(tr);
     });
@@ -555,5 +511,6 @@ function resetarProdutos() {
 
 document.addEventListener('DOMContentLoaded', () => {
     renderizarTabelaProdutos();
-    document.getElementById('btn-reset-produtos').onclick = resetarProdutos;
+    const btnResetProdutos = document.getElementById('btn-reset-produtos');
+    if (btnResetProdutos) btnResetProdutos.onclick = resetarProdutos;
 });
